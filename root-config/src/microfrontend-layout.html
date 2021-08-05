@@ -1,4 +1,14 @@
 <single-spa-router>
   <application name="@thanatpp/navbar"></application>
-  <application name="@thanatpp/men-item"></application>
+  <main>
+    <route default>
+      <application name="@thanatpp/men-item"></application>
+    </route>
+    <route path="/men">
+      <application name="@thanatpp/men-item"></application>
+    </route>
+    <route path="/women">
+      <application name="@thanatpp/women-item"></application>
+    </route>
+  </main>
 </single-spa-router>
