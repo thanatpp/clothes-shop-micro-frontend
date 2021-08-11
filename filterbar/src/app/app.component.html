@@ -1,0 +1,10 @@
+<div class="flex">
+    <div class="relative w-64">
+        <div class="fixed top-24 ml-5 w-52" *ngIf="menuStatus">
+            <p class="px-3 my-6 font-bold text-3xl">{{gender}}</p>
+            <button class="block px-3 py-2 text-lg hover:bg-gray-100 w-full text-left focus:bg-gray-100 focus:outline-none" (click)="selectTops()">TOPS</button>
+            <button class="block px-3 py-2 text-lg hover:bg-gray-100 w-full text-left focus:bg-gray-100 focus:outline-none" (click)="selectBottoms()">BOTTOMS</button>
+            <button class="block px-3 py-2 text-lg hover:bg-gray-100 w-full text-left focus:bg-gray-100 focus:outline-none" (click)="selectAccessories()">ACCESSORIES</button>
+        </div>
+    </div>
+</div>
