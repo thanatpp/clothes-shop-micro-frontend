@@ -1,9 +1,9 @@
-<nav class="bg-white border border-gray-200">
+<nav class="bg-white border border-gray-200 fixed left-0 right-0 ">
   <div class="max-w-7xl mx-auto">
     <div class="flex justify-between">
       <div class="flex space-x-6">
         <div class="">
-          <a href="#" class="flex items-center py-5 px-5">
+          <a class="flex items-center py-5 px-5">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
@@ -11,12 +11,12 @@
           </a>
         </div>
         <div class="hidden md:flex items-center space-x-1">
-          <a routerLink="/men" class="px-5 py-6 font-normal text-xl text-gray-400 border-b-2 border-transparent hover:border-indigo-400 hover:text-black">Men</a>
-          <a routerLink="/women" class="px-5 py-6 font-normal text-xl text-gray-400 border-b-2 border-transparent hover:border-indigo-400 hover:text-black">Women</a>
+          <a routerLink="/men" class="px-5 py-6 font-normal text-xl text-gray-400 border-b-2 border-transparent hover:border-indigo-400 hover:text-black" (click)="selectMen()">Men</a>
+          <a routerLink="/women" class="px-5 py-6 font-normal text-xl text-gray-400 border-b-2 border-transparent hover:border-indigo-400 hover:text-black" (click)="selectWomen()">Women</a>
         </div>
       </div>
-      <div class="flex items-center space-x-1 relative">
-        <button type="button" class="hidden md:flex" id="menu-button" (click)="toggleProfile()">
+      <div class="flex items-center space-x-1 relative pr-6">
+        <button type="button" class="hidden md:flex focus:outline-none" id="menu-button" (click)="toggleProfile()" (clickOutside)="onClickedOutsideProfile($event)">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
@@ -26,7 +26,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
           </svg>
         </a>
-        <button class="md:hidden pr-6" (click)="toggleMenu()">
+        <button class="md:hidden focus:outline-none" (click)="toggleMenu()">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
@@ -37,7 +37,7 @@
     <!-- drop down profile menu -->
     <div class="flex justify-end mr-16" *ngIf="onClickProfile">
       <div class="md:block hidden absolute top-16 border border-gray-200 rounded-md shadow-lg bg-white w-max">
-        <a href="#" class="block px-7 py-2 hover:bg-gray-100">Profile</a>
+        <a href="#" (click)="selectProfile()" class="block px-7 py-2 hover:bg-gray-100">Profile</a>
         <a href="#" class="block px-7 py-2 hover:bg-gray-100">Purchase History</a>
         <a href="#" class="block px-7 py-2 hover:bg-gray-100">Logout</a>
       </div>
@@ -45,8 +45,8 @@
 
     <!-- drop down nav menu -->
     <div class="md:hidden" *ngIf="onClickMenu">
-        <a routerLink="/men" class="block px-7 py-2 hover:bg-gray-100 font-medium">Men</a>
-        <a routerLink="/women" class="block px-7 py-2 hover:bg-gray-100 font-medium">Women</a>
+        <a routerLink="/men" (click)="selectMen()" (click)="selectMen()" class="block px-7 py-2 hover:bg-gray-100 font-medium">Men</a>
+        <a routerLink="/women" (click)="selectWomen()" (click)="selectWomen()" class="block px-7 py-2 hover:bg-gray-100 font-medium">Women</a>
         <a href="#" class="block px-7 py-2 hover:bg-gray-100 font-medium">Cart</a>
         <a href="#" class="block px-7 py-2 hover:bg-gray-100 font-medium">Profile</a>
         <a href="#" class="block px-7 py-2 hover:bg-gray-100 font-medium">Purchase History</a>

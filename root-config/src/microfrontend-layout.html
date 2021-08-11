@@ -2,13 +2,28 @@
   <application name="@thanatpp/navbar"></application>
   <main>
     <route default>
-      <application name="@thanatpp/men-item"></application>
+      <div class="max-w-7xl mx-auto">
+        <div class="flex">
+          <application name="@thanatpp/filterbar"></application>
+          <application name="@thanatpp/listitem"></application>
+        </div>
+      </div>
     </route>
     <route path="/men">
-      <application name="@thanatpp/men-item"></application>
+      <div class="max-w-7xl mx-auto">
+        <div class="flex">
+          <application name="@thanatpp/filterbar"></application>
+          <application name="@thanatpp/listitem"></application>
+        </div>
+      </div>
     </route>
     <route path="/women">
-      <application name="@thanatpp/women-item"></application>
+      <div class="max-w-7xl mx-auto">
+        <div class="flex">
+          <application name="@thanatpp/filterbar"></application>
+          <application name="@thanatpp/listitem"></application>
+        </div>
+      </div>
     </route>
   </main>
 </single-spa-router>
