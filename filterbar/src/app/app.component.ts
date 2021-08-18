@@ -14,8 +14,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit(){
     this.menuStatus = true
-    this.gender = "MEN"
-    this.type = "ALL"
+    this.type = "all"
+    this.checkUrl()
     window.addEventListener("toggleMenu", () => this.toggleMenu())
     window.addEventListener("selectGender", (e: CustomEvent) => {
       this.gender = e.detail
@@ -23,17 +23,22 @@ export class AppComponent implements OnInit {
   }
 
   selectTops(){
-    this.type = "TOPS"
+    this.type = "tops"
     this.emitType()
   }
 
   selectBottoms(){
-    this.type = "BOTTOMS"
+    this.type = "bottoms"
     this.emitType()
   }
 
   selectAccessories(){
-    this.type = "ACCESSORIES"
+    this.type = "accessories"
+    this.emitType()
+  }
+
+  selectAll(){
+    this.type = "all"
     this.emitType()
   }
 
@@ -44,5 +49,14 @@ export class AppComponent implements OnInit {
   emitType(){
     const selectType = new CustomEvent("selectType", {detail: this.type})
     window.dispatchEvent(selectType)
+  }
+
+  checkUrl(){
+    const url = window.location.href.split("/")
+    if(url[3] == "women"){
+      this.gender = "women"
+    }else{
+      this.gender = "men"
+    }
   }
 }
