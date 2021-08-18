@@ -41,19 +41,19 @@ export class AppComponent implements OnInit {
   }
 
   selectMen(){
-    this.gender = "MEN"
+    this.gender = "men"
     this.emitGender()
   }
 
   selectWomen(){
-    this.gender = "WOMEN"
+    this.gender = "women"
     this.emitGender()
   }
 
   emitGender(){
     const genderEvent = new CustomEvent("selectGender", {detail: this.gender})
     window.dispatchEvent(genderEvent)
-    const typeEvent = new CustomEvent("selectType", {detail: "ALL"})
+    const typeEvent = new CustomEvent("selectType", {detail: "all"})
     window.dispatchEvent(typeEvent)
   }
 }
