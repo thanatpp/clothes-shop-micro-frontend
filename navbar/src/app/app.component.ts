@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
+//import { hello } from '@thanatpp/utility';
 
 @Component({
   selector: 'navbar-root',
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
     this.onClickMenu = false
     this.onClickProfile = false
     this.onClickOutside = false
+    //hello()
   }
 
   toggleMenu(){

@@ -1,29 +1,43 @@
 <single-spa-router>
-  <application name="@thanatpp/navbar"></application>
-  <main>
-    <route default>
-      <div class="max-w-7xl mx-auto">
-        <div class="flex">
-          <application name="@thanatpp/filterbar"></application>
-          <application name="@thanatpp/listitem"></application>
-        </div>
+  <route default>
+    <header class="sticky top-0 z-50">
+      <application name="@thanatpp/navbar"></application>
+    </header>
+    <main class="relative max-w-7xl mx-auto">
+      <div class="flex">
+        <application name="@thanatpp/filterbar"></application>
+        <application name="@thanatpp/listitem"></application>
       </div>
-    </route>
-    <route path="/men">
-      <div class="max-w-7xl mx-auto">
-        <div class="flex">
-          <application name="@thanatpp/filterbar"></application>
-          <application name="@thanatpp/listitem"></application>
-        </div>
+    </main>
+  </route>
+  <route path="/men">
+    <header class="sticky top-0 z-50">
+      <application name="@thanatpp/navbar"></application>
+    </header>
+    <main class="relative max-w-7xl mx-auto">
+      <div class="flex">
+        <application name="@thanatpp/filterbar"></application>
+        <application name="@thanatpp/listitem"></application>
       </div>
-    </route>
-    <route path="/women">
-      <div class="max-w-7xl mx-auto">
-        <div class="flex">
-          <application name="@thanatpp/filterbar"></application>
-          <application name="@thanatpp/listitem"></application>
-        </div>
+    </main>
+  </route>
+  <route path="/women">
+    <header class="sticky top-0 z-50">
+      <application name="@thanatpp/navbar"></application>
+    </header>
+    <main class="relative max-w-7xl mx-auto">
+      <div class="flex">
+        <application name="@thanatpp/filterbar"></application>
+        <application name="@thanatpp/listitem"></application>
       </div>
-    </route>
-  </main>
+    </main>
+  </route>
+  <route path="/product">
+    <header class="sticky top-0 z-50">
+      <application name="@thanatpp/navbar"></application>
+    </header>
+    <main class="relative max-w-7xl mx-auto">
+      <application name="@thanatpp/product"></application>
+    </main>
+  </route>
 </single-spa-router>

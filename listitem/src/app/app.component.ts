@@ -1,5 +1,5 @@
-import { prepareEventListenerParameters } from '@angular/compiler/src/render3/view/template';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'listitem-root',
@@ -12,6 +12,8 @@ export class AppComponent implements OnInit {
   type: string
   items: any[]
   showDetail: boolean
+
+  constructor(private router: Router) {}
 
   ngOnInit(){
     this.type = "ALL"
@@ -26,8 +28,8 @@ export class AppComponent implements OnInit {
     //fake items
     this.items = [{name: "THE GODFAGLE TEE", price: 320}, {name: "THE GODFAGLE TEE", price: 790}, {name: "THE GODFAGLE TEE", price: 199}, 
                   {name: "THE GODFAGLE TEE", price: 690}, {name: "THE GODFAGLE TEE", price: 690}, {name: "THE GODFAGLE TEE", price: 690},
-                  {name: "THE GODFAGLE TEE", price: 690}, {name: "THE GODFAGLE TEE", price: 690}, {name: "THE GODFAGLE TEE", price: 690}]        
-                     
+                  {name: "THE GODFAGLE TEE", price: 690}, {name: "THE GODFAGLE TEE", price: 690}, {name: "THE GODFAGLE TEE", price: 690}]
+     
   }
 
   checkUrl(){
@@ -41,11 +43,7 @@ export class AppComponent implements OnInit {
 
   clickItem(i: any){
     console.log("click item ", i)
-  }
-
-  goDetail(i: any){
-    const next = this.gender + "/" + i
-    console.log(next)
-    return next
+    localStorage.setItem("product_id", i)
+    window.location.href = "/product"
   }
 }
