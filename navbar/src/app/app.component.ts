@@ -9,6 +9,7 @@ import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 
 export class AppComponent implements OnInit {
 
+  title: "navbar"
   onClickProfile: boolean
   onClickMenu: boolean
   onClickOutside: boolean
@@ -21,13 +22,10 @@ export class AppComponent implements OnInit {
     this.onClickMenu = false
     this.onClickProfile = false
     this.onClickOutside = false
-    //hello()
   }
 
   toggleMenu(){
     this.onClickMenu = !this.onClickMenu
-    const event = new Event("toggleMenu");
-    window.dispatchEvent(event);
   }
 
   toggleProfile(){
@@ -45,11 +43,13 @@ export class AppComponent implements OnInit {
   selectMen(){
     this.gender = "men"
     this.emitGender()
+    this.toggleMenu()
   }
 
   selectWomen(){
     this.gender = "women"
     this.emitGender()
+    this.toggleMenu()
   }
 
   emitGender(){

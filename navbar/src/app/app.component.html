@@ -44,9 +44,9 @@
     </div>
 
     <!-- drop down nav menu -->
-    <div class="md:hidden" *ngIf="onClickMenu">
-        <a routerLink="/men" (click)="selectMen()" (click)="selectMen()" class="block px-7 py-2 hover:bg-gray-100 font-medium">Men</a>
-        <a routerLink="/women" (click)="selectWomen()" (click)="selectWomen()" class="block px-7 py-2 hover:bg-gray-100 font-medium">Women</a>
+    <div class="md:hidden absolute bg-white w-screen border-b border-gray-200" *ngIf="onClickMenu">
+        <a routerLink="/men" (click)="selectMen()" class="block px-7 py-2 hover:bg-gray-100 font-medium">Men</a>
+        <a routerLink="/women" (click)="selectWomen()" class="block px-7 py-2 hover:bg-gray-100 font-medium">Women</a>
         <a href="#" class="block px-7 py-2 hover:bg-gray-100 font-medium">Cart</a>
         <a href="#" class="block px-7 py-2 hover:bg-gray-100 font-medium">Profile</a>
         <a href="#" class="block px-7 py-2 hover:bg-gray-100 font-medium">Purchase History</a>

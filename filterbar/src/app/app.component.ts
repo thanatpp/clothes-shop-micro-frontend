@@ -8,15 +8,12 @@ import { Component, OnInit } from '@angular/core';
 
 export class AppComponent implements OnInit {
   
-  menuStatus: boolean
   gender: string
   type: string
 
   ngOnInit(){
-    this.menuStatus = true
     this.type = "all"
     this.checkUrl()
-    window.addEventListener("toggleMenu", () => this.toggleMenu())
     window.addEventListener("selectGender", (e: CustomEvent) => {
       this.gender = e.detail
     })
@@ -40,10 +37,6 @@ export class AppComponent implements OnInit {
   selectAll(){
     this.type = "all"
     this.emitType()
-  }
-
-  toggleMenu(){
-    this.menuStatus = !this.menuStatus
   }
 
   emitType(){
