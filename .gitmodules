@@ -1,9 +1,0 @@
-[submodule "root-config/sharedstate"]
-	path = root-config/sharedstate
-	url = https://github.com/thanatpp/sharedstate.git
-[submodule "listitem/sharedstate"]
-	path = listitem/sharedstate
-	url = https://github.com/thanatpp/sharedstate.git
-[submodule "product/sharedstate"]
-	path = product/sharedstate
-	url = https://github.com/thanatpp/sharedstate.git
