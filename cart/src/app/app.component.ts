@@ -17,23 +17,19 @@ export class AppComponent implements OnInit {
 
   amountChange(e, i){
     this.items[i].amount = e.target.value
-    console.log(this.items)
   }
 
-  minus(i){
+  dec(i){
     if(this.items[i].amount != 1){
       this.items[i].amount = Number(this.items[i].amount) - 1
     }
-    console.log(this.items)
   }
 
-  plus(i){
+  inc(i){
     this.items[i].amount = Number(this.items[i].amount) + 1
-    console.log(this.items)
   }
 
   price(i: any){
-  
     return Intl.NumberFormat().format(this.items[i].amount * this.items[i].price)
   }
 

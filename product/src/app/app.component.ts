@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
   xl: Number
   xxl: Number
 
-
   constructor(private location: Location) {}
 
   ngOnInit(){
@@ -44,14 +43,14 @@ export class AppComponent implements OnInit {
     console.log(this.amount)
   }
 
-  minus(){
+  dec(){
     if(this.amount != 1){
       this.amount = Number(this.amount) - 1
     }
     console.log(this.amount)
   }
 
-  plus(){
+  inc(){
     this.amount = Number(this.amount) + 1
     console.log(this.amount)
   }
