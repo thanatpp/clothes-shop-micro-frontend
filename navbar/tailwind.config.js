@@ -2,6 +2,7 @@ const { guessProductionMode } = require("@ngneat/tailwind");
 
 module.exports = {
     prefix: '',
+    mode: 'jit',
     purge: {
       enabled: guessProductionMode(),
       content: [
