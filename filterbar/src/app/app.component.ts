@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
 
   checkUrl(){
     const url = window.location.href.split("/")
-    if(url[3] == "women"){
+    if(url[4] == "women"){
       this.gender = "women"
     }else{
       this.gender = "men"

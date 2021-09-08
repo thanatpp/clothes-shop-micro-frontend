@@ -1,20 +1,35 @@
-<div class="flex mt-10 justify-center">
-    <div class="block md:flex bg-white rounded-lg shadow-lg md:divide-x divide-gray-600 p-5">
-        <div class="flex flex-col p-10 md:w-1/2 w-full">
-            <span class="font-mono font-bold text-5xl">LOGIN</span><br>
-            <span class="font-mono font-normal text-xl opacity-60">Log in with your email address and password.</span><br><br><br>
-            <div class="">
-                <input type="text" class="w-full font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300" placeholder="Email address" [(ngModel)]="email">
-            </div><br>
-            <div class="">
-                <input type="password" class="w-full font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300" placeholder="Password" [(ngModel)]="password">
+<header class="sticky top-0 z-50">
+    <thanatpp-navbar></thanatpp-navbar>
+</header>
+<main class="relative max-w-7xl mx-auto">
+    <div class="flex mt-10 justify-center">
+        <div class="block md:flex bg-white rounded-lg shadow-lg md:divide-x divide-gray-600 p-5">
+            <div class="flex flex-col p-10 md:w-1/2 w-full">
+                <span class="font-mono font-bold text-5xl">LOGIN</span><br>
+                <span class="font-mono font-normal text-xl opacity-60">Log in with your email address and
+                    password.</span><br><br><br>
+                <div class="">
+                    <input type="text"
+                        class="w-full font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300"
+                        placeholder="Email address" [(ngModel)]="email">
+                </div><br>
+                <div class="">
+                    <input type="password"
+                        class="w-full font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300"
+                        placeholder="Password" [(ngModel)]="password">
+                </div>
+                <button
+                    class="mt-10 rounded-lg w-1/2 font-mono bg-gray-800 text-white font-medium text-xl py-3 focus:outline-none"
+                    (click)="login()">LOGIN</button>
             </div>
-            <button class="mt-10 rounded-lg w-1/2 font-mono bg-gray-800 text-white font-medium text-xl py-3 focus:outline-none" (click)="login()">LOGIN</button>
-        </div>
-        <div class="flex flex-col p-10 md:w-1/2 w-full border-t md:border-t-0 border-gray-600">
-            <span class="font-mono font-bold text-5xl">CREATE AN ACCOUNT</span><br>
-            <span class="font-mono font-normal text-xl opacity-60">If you create an account, it takes less time to go through checkout and complete your orders. Register today for free!</span>
-            <button routerLink="/registry" class="mt-4 rounded-lg w-1/2 font-mono bg-white ring-2 ring-gray-800 ring-inset text-black font-medium text-xl py-3 focus:outline-none">CREATE AN ACCOUNT</button>
+            <div class="flex flex-col p-10 md:w-1/2 w-full border-t md:border-t-0 border-gray-600">
+                <span class="font-mono font-bold text-5xl">CREATE AN ACCOUNT</span><br>
+                <span class="font-mono font-normal text-xl opacity-60">If you create an account, it takes less time to
+                    go through checkout and complete your orders. Register today for free!</span>
+                <button routerLink="/registry"
+                    class="mt-4 rounded-lg w-1/2 font-mono bg-white ring-2 ring-gray-800 ring-inset text-black font-medium text-xl py-3 focus:outline-none">CREATE
+                    AN ACCOUNT</button>
+            </div>
         </div>
     </div>
-</div>
+</main>
