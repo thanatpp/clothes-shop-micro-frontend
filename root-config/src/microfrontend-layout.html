@@ -1,63 +1,61 @@
 <single-spa-router>
+  <redirect from="/" to="/collections/men"></redirect>
+  <route path="/collections">
+    <header class="sticky top-0 z-50">
+      <application name="@thanatpp/navbar"></application>
+    </header>
+    <main class="relative max-w-7xl mx-auto">
+      <route path="/men">
+        <div class="flex">
+          <application name="@thanatpp/filterbar"></application>
+          <application name="@thanatpp/listitem"></application>
+        </div>
+      </route>
+      <route path="/women">
+        <div class="flex">
+          <application name="@thanatpp/filterbar"></application>
+          <application name="@thanatpp/listitem"></application>
+        </div>
+      </route>
+      <route path="/product">
+        <div class="flex">
+          <application name="@thanatpp/product"></application>
+        </div>
+      </route>
+    </main>
+  </route>
+  <route path="/account">
+    <route path="/purchase-history">
+      <header class="sticky top-0 z-50">
+        <application name="@thanatpp/navbar"></application>
+      </header>
+      <main class="relative max-w-7xl mx-auto">
+        <application name="@thanatpp/purchase-history"></application>
+      </main>
+    </route>
+    <route path="/cart">
+      <header class="sticky top-0 z-50">
+        <application name="@thanatpp/navbar"></application>
+      </header>
+      <main class="relative max-w-7xl mx-auto">
+        <application name="@thanatpp/cart"></application>
+      </main>
+    </route>
+    <route path="/login">
+      <application name="@thanatpp/login"></application>
+    </route>
+    <route path="/registry">
+      <application name="@thanatpp/registry"></application>
+    </route>
+  </route>
   <route default>
     <header class="sticky top-0 z-50">
       <application name="@thanatpp/navbar"></application>
     </header>
     <main class="relative max-w-7xl mx-auto">
       <div class="flex">
-        <application name="@thanatpp/filterbar"></application>
-        <application name="@thanatpp/listitem"></application>
+        <h1>404 Not Found</h1>
       </div>
     </main>
   </route>
-  <route path="/men">
-    <header class="sticky top-0 z-50">
-      <application name="@thanatpp/navbar"></application>
-    </header>
-    <main class="relative max-w-7xl mx-auto">
-      <div class="flex">
-        <application name="@thanatpp/filterbar"></application>
-        <application name="@thanatpp/listitem"></application>
-      </div>
-    </main>
-  </route>
-  <route path="/women">
-    <header class="sticky top-0 z-50">
-      <application name="@thanatpp/navbar"></application>
-    </header>
-    <main class="relative max-w-7xl mx-auto">
-      <div class="flex">
-        <application name="@thanatpp/filterbar"></application>
-        <application name="@thanatpp/listitem"></application>
-      </div>
-    </main>
-  </route>
-  <route path="/product">
-    <header class="sticky top-0 z-50">
-      <application name="@thanatpp/navbar"></application>
-    </header>
-    <main class="relative max-w-7xl mx-auto">
-      <application name="@thanatpp/product"></application>
-    </main>
-  </route>
-  <route path="/cart">
-    <header class="sticky top-0 z-50">
-      <application name="@thanatpp/navbar"></application>
-    </header>
-    <main class="relative max-w-7xl mx-auto">
-      <application name="@thanatpp/cart"></application>
-    </main>
-  </route>
-  <route path="/login">
-    <header class="sticky top-0 z-50">
-      <application name="@thanatpp/navbar"></application>
-    </header>
-    <main class="relative max-w-7xl mx-auto">
-      <application name="@thanatpp/login"></application>
-    </main>
-  </route>
-  <route path="/registry">
-    <application name="@thanatpp/registry"></application>
-  </route>
-
 </single-spa-router>
