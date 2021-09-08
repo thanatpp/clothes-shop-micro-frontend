@@ -1,1 +1,20 @@
-Registry
+<header class="sticky top-0 z-50">
+    <thanatpp-navbar></thanatpp-navbar>
+</header>
+<main class="relative max-w-7xl mx-auto">
+    <div class="flex mt-10 justify-center px-3">
+        <div class="block md:flex bg-white rounded-lg shadow-lg md:divide-x divide-gray-600 p-5">
+            <div class="md:px-20 py-5 px-3 block justify-start">
+                <span class="font-mono font-bold text-5xl">CREATE AN ACCOUNT</span><br><br>
+                <span class="font-mono font-normal text-xl opacity-60">Please complete the information.</span><br>
+                <div class="pt-12 space-y-5" [formGroup]="createAcount">
+                    <input formControlName="firstName" type="text" class="w-full font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300" placeholder="Firstname"><br>
+                    <input formControlName="lastName" type="text" class="w-full font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300" placeholder="Lastname"><br>
+                    <input formControlName="email" type="email" class="w-full font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300" placeholder="Email Address"><br>
+                    <input formControlName="password" type="password" class="w-full font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300" placeholder="Password"><br>
+                </div>
+                <button class="mt-10 rounded-lg w-1/2 font-mono bg-gray-800 text-white font-medium text-xl py-3 focus:outline-none" (click)="register()">REGISTER</button>
+            </div>
+        </div>
+    </div>
+</main>
