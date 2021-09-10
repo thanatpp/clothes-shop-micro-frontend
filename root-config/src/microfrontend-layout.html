@@ -1,5 +1,6 @@
 <single-spa-router>
   <redirect from="/" to="/collections/men"></redirect>
+  <redirect from="/account" to="/account/profile"></redirect>
   <route path="/collections">
     <header class="sticky top-0 z-50">
       <application name="@thanatpp/navbar"></application>
@@ -24,37 +25,35 @@
       </route>
     </main>
   </route>
+  <route path="/login">
+    <application name="@thanatpp/login"></application>
+  </route>
+  <route path="/registry">
+    <application name="@thanatpp/registry"></application>
+  </route>
   <route path="/account">
-    <route path="/purchase-history">
-      <header class="sticky top-0 z-50">
-        <application name="@thanatpp/navbar"></application>
-      </header>
-      <main class="relative max-w-7xl mx-auto">
+    <header class="sticky top-0 z-50">
+      <application name="@thanatpp/navbar"></application>
+    </header>
+    <main class="relative max-w-7xl mx-auto">
+      <route path="/purchase-history">
         <application name="@thanatpp/purchase-history"></application>
-      </main>
-    </route>
-    <route path="/cart">
-      <header class="sticky top-0 z-50">
-        <application name="@thanatpp/navbar"></application>
-      </header>
-      <main class="relative max-w-7xl mx-auto">
+      </route>
+      <route path="/cart">
         <application name="@thanatpp/cart"></application>
-      </main>
-    </route>
-    <route path="/login">
-      <application name="@thanatpp/login"></application>
-    </route>
-    <route path="/registry">
-      <application name="@thanatpp/registry"></application>
-    </route>
+      </route>
+      <route path="/profile">
+        <application name="@thanatpp/profile"></application>
+      </route>
+    </main>
   </route>
   <route default>
     <header class="sticky top-0 z-50">
       <application name="@thanatpp/navbar"></application>
     </header>
     <main class="relative max-w-7xl mx-auto">
-      <div class="flex">
-        <h1>404 Not Found</h1>
+      <div class="flex mt-5">
+        <span class="px-8 text-2xl font-mono font-semibold opacity-70">404 Not Found</span>
       </div>
     </main>
   </route>

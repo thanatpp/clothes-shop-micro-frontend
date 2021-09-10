@@ -1,1 +1,35 @@
-Purchase History
+<div class="flex mt-8 md:flex justify-center">
+    <div class="block justify-start md:w-4/6 w-full px-3">
+        <div class="w-full">
+            <span class="font-mono font-bold md:text-5xl text-3xl">PURCHASE HISTORY</span><br>
+        </div>
+        <div class="border border-gray-400 mt-5" *ngIf="isEmptyItem() == true">
+            <div class="px-5 py-6">
+                <span class="font-mono font-normal text-xl opacity-50">We have no oders for this account.</span>
+            </div>
+        </div>
+        <div class="mt-5" *ngIf="isEmptyItem() == false">
+            <div class="w-full border-t border-gray-400">
+                <div class="" *ngFor="let item of items; index as i, last as isLast, first as isFirst">
+                    <!-- item in cart -->
+                    <div class="flex py-5" [ngClass]="!isLast ? 'border-b border-gray-400' : ''">
+                        <div class="flex-shrink-0">
+                            <img class="rounded-lg w-28 md:w-40"
+                                src="https://cdn.shopify.com/s/files/1/0113/4365/9108/products/01_0b78889b-b62c-45d8-a033-7bf4aaae8f33_600x.jpg?v=1603537849">
+                        </div>
+                        <div class="block pl-5 w-full md:space-y-5">
+                            <div class="flex flex-wrap justify-between"> 
+                                <p class="text-2xl md:text-4xl font-bold font-mono">{{item.name}}</p>
+                                <span class="text-lg md:text-xl font-mono font-light subpixel-antialiased leading-relaxed opacity-60">27/8/2564</span>
+                            </div>
+                            <div class="text-lg md:text-xl font-mono font-light subpixel-antialiased leading-relaxed opacity-60">PRODUCT ID: 433031</div>
+                            <div class="text-lg md:text-xl font-mono font-light subpixel-antialiased leading-relaxed opacity-60">SIZE: XXL</div>
+                            <div class="text-lg md:text-xl font-mono font-light subpixel-antialiased leading-relaxed opacity-60">QUANTITY: 2</div>
+                            <div class="text-lg md:text-xl font-mono font-light subpixel-antialiased leading-relaxed opacity-60">TOTAL: 1,200 ฿</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -37,7 +37,7 @@
     <!-- drop down profile menu -->
     <div class="flex justify-end mr-16" *ngIf="onClickProfile">
       <div class="md:block hidden absolute top-16 border border-gray-200 rounded-md shadow-lg bg-white w-max">
-        <a href="#" (click)="selectProfile()" class="block px-7 py-2 hover:bg-gray-100">Profile</a>
+        <a routerLink="/account/profile" (click)="selectProfile()" class="block px-7 py-2 hover:bg-gray-100">Profile</a>
         <a routerLink="/account/purchase-history" class="block px-7 py-2 hover:bg-gray-100">Purchase History</a>
         <a href="#" class="block px-7 py-2 hover:bg-gray-100">Logout</a>
       </div>
@@ -48,7 +48,7 @@
         <a routerLink="/collections/men" (click)="selectMen()" class="block px-7 py-2 hover:bg-gray-100 font-medium">Men</a>
         <a routerLink="/collections/women" (click)="selectWomen()" class="block px-7 py-2 hover:bg-gray-100 font-medium">Women</a>
         <a routerLink="/account/cart" class="block px-7 py-2 hover:bg-gray-100 font-medium">Cart</a>
-        <a href="#" class="block px-7 py-2 hover:bg-gray-100 font-medium">Profile</a>
+        <a routerLink="/account/profile" class="block px-7 py-2 hover:bg-gray-100 font-medium">Profile</a>
         <a routerLink="/account/purchase-history" class="block px-7 py-2 hover:bg-gray-100 font-medium">Purchase History</a>
         <a href="#" class="block px-7 py-2 hover:bg-gray-100 font-medium">Logout</a>
     </div>

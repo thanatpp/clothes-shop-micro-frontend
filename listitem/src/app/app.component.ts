@@ -44,6 +44,6 @@ export class AppComponent implements OnInit {
   clickItem(i: any){
     console.log("click item ", i)
     localStorage.setItem("product_id", i)
-    window.location.href = "/product"
+    //window.location.href = "/product"
   }
 }
