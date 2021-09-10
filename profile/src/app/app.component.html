@@ -1,0 +1,141 @@
+<div class="flex justify-center">
+    <div class="w-full px-3 flex flex-col md:w-3/4">
+        <div class="w-full py-5">
+            <span class="font-mono font-bold md:text-5xl text-3xl">PROFILE</span>
+        </div>
+        <div class="block flex-col border-t border-gray-400 space-y-7">
+            <div class="block flex-col space-y-5" *ngIf="!isEditProfile">
+                <div class="flex flex-col flex-wrap  pt-5">
+                    <span class="font-mono font-bold text-2xl">EMAIL ADDRESS</span>
+                    <span class="font-mono font-normal text-xl opacity-60">{{this.profile.email}}</span>
+                </div>
+                <div class="flex justify-around">
+                    <div class="flex flex-col flex-wrap w-1/2">
+                        <span class="font-mono font-bold text-2xl">FIRST NAME</span>
+                        <span class="font-mono font-normal text-xl opacity-60">{{this.profile.firstName}}</span>
+                    </div>
+                    <div class="flex flex-col flex-wrap w-1/2">
+                        <span class="font-mono font-bold text-2xl">LAST NAME</span>
+                        <span class="font-mono font-normal text-xl opacity-60">{{this.profile.lastName}}</span>
+                    </div>
+                </div>
+                <div class="flex justify-around">
+                    <div class="flex flex-col flex-wrap w-1/2">
+                        <span class="font-mono font-bold text-2xl">PHONE NUMBER</span>
+                        <span class="font-mono font-normal text-xl opacity-60">{{isNull(this.profile.phoneNumber)}}</span>
+                    </div>
+                    <div class="flex flex-col flex-wrap w-1/2">
+                        <span class="font-mono font-bold text-2xl">BIRTHDAY</span>
+                        <span class="font-mono font-normal text-xl opacity-60">{{this.profile.birthday}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="block flex-col space-y-5" *ngIf="isEditProfile" [formGroup]="editProfileForm">
+                <div class="flex flex-col flex-wrap  pt-5">
+                    <span class="font-mono font-bold text-2xl">EMAIL ADDRESS</span>
+                    <span class="font-mono font-normal text-xl opacity-60">{{this.profile.email}}</span>
+                </div>
+                <div class="block md:flex justify-around">
+                    <div class="flex flex-col flex-wrap w-full md:w-1/2">
+                        <span class="font-mono font-bold text-2xl">FIRST NAME</span>
+                        <input formControlName="firstName" type="text" class="w-full md:w-2/3 font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300" placeholder={{this.profile.firstName}}>
+                    </div>
+                    <div class="flex flex-col flex-wrap w-full md:w-1/2">
+                        <span class="font-mono font-bold text-2xl">LAST NAME</span>
+                        <input formControlName="lastName" type="text" class="w-full md:w-2/3 font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300" placeholder={{this.profile.lastName}}>
+                    </div>
+                </div>
+                <div class="block md:flex justify-around">
+                    <div class="flex flex-col flex-wrap w-full md:w-1/2">
+                        <span class="font-mono font-bold text-2xl">PHONE NUMBER</span>
+                        <input formControlName="phoneNumber" type="text" class="w-full md:w-2/3 font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300" placeholder={{this.profile.phoneNumber}}>
+                    </div>
+                    <div class="block md:flex flex-col flex-wrap w-full md:w-1/2">
+                        <span class="font-mono font-bold text-2xl">BIRTHDAY</span>
+                        <input formControlName="birthday" type="date" class="w-full md:w-2/3 font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300">
+                    </div>
+                </div>
+            </div>
+            <div class="pb-10" *ngIf="!isEditProfile">
+                <button
+                class="w-full mt-5 rounded-lg md:w-1/4 font-mono ring-2 ring-gray-800 ring-inset text-black font-medium text-xl py-3 focus:outline-none" (click)="editProfile()">EDIT
+                PROFILE</button>
+            </div>
+            <div class="pb-10 flex space-x-5" *ngIf="isEditProfile">
+                <button
+                class="w-full mt-5 rounded-lg md:w-1/4 font-mono ring-2 bg-gray-800 ring-gray-800 ring-inset text-white font-medium text-xl py-3 focus:outline-none" (click)="saveChange()">SAVE CHANGES</button>
+                <button
+                class="w-full mt-5 rounded-lg md:w-1/4 font-mono ring-2 ring-gray-800 ring-inset text-black font-medium text-xl py-3 focus:outline-none" (click)="cancel()">CANCEl</button>
+            </div>
+        </div>
+        <div class="w-full py-5">
+            <span class="font-mono font-bold md:text-5xl text-3xl">ADDRESS</span>
+        </div>
+        <div class="block flex-col border-t border-gray-400 space-y-7">
+            <div class="block flex-col space-y-5">
+                <div class="pt-5" *ngIf="isNoAddress()">
+                    <span class="font-mono font-normal text-xl opacity-60">There is no registered shipping address.</span>
+                </div>
+                <div class="space-y-5" *ngIf="isAddAddress" [formGroup]="addAddressForm">
+                    <div class="block md:flex justify-around pt-5">
+                        <div class="flex flex-col flex-wrap w-full md:w-1/2">
+                            <span class="font-mono font-bold text-2xl">FIRST NAME</span>
+                            <input formControlName="firstName" type="text" class="w-full md:w-2/3 font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300">
+                        </div>
+                        <div class="flex flex-col flex-wrap w-full md:w-1/2">
+                            <span class="font-mono font-bold text-2xl">LAST NAME</span>
+                            <input formControlName="lastName" type="text" class="w-full md:w-2/3 font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300">
+                        </div>
+                    </div>
+                    <div class="block md:flex justify-around">
+                        <div class="flex flex-col flex-wrap w-full md:w-1/2">
+                            <span class="font-mono font-bold text-2xl">ADDRESS</span>
+                            <input formControlName="address" type="text" class="w-full md:w-2/3 font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300">
+                        </div>
+                        <div class="flex flex-col flex-wrap w-full md:w-1/2">
+                            <span class="font-mono font-bold text-2xl">ADDRESS DETAILS</span>
+                            <input formControlName="addressDetails" type="text" class="w-full md:w-2/3 font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300">
+                        </div>
+                    </div>
+                    <div class="block md:flex justify-around">
+                        <div class="flex flex-col flex-wrap w-full md:w-1/2">
+                            <span class="font-mono font-bold text-2xl">DISTRICT</span>
+                            <input formControlName="district" type="text" class="w-full md:w-2/3 font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300">
+                        </div>
+                        <div class="flex flex-col flex-wrap w-full md:w-1/2">
+                            <span class="font-mono font-bold text-2xl">PROVINCE</span>
+                            <input formControlName="province" type="text" class="w-full md:w-2/3 font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300">
+                        </div>
+                    </div>
+                    <div class="flex flex-col flex-wrap w-full md:w-1/2">
+                        <span class="font-mono font-bold text-2xl">POSTAL CODE</span>
+                        <input formControlName="postalCode" type="text" class="w-full md:w-2/3 font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300">
+                    </div>
+                </div>
+                <div class="" *ngIf="!isAddAddress">
+                    <div class="flex flex-col flex-wrap py-5" *ngFor="let item of address; index as i">
+                        <div class="flex flex-wrap justify-between">
+                            <span class="font-mono font-bold text-2xl">{{item.firstName}} {{item.lastName}} ({{i+1}})</span>
+                            <button class="outline-none hover:outline-none focus:outline-none focus:ring-0:">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                  </svg>
+                            </button>
+                        </div>
+                        <span class="font-mono font-normal text-xl opacity-60">{{item.address}},{{item.addressDetails}},{{item.district}},{{item.province}},{{item.postalCode}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="pb-5" *ngIf="!isAddAddress">
+                <button
+                class="w-full md:w-1/4 rounded-lg font-mono ring-2 ring-gray-800 ring-inset text-black font-medium text-xl py-3 focus:outline-none px-3" (click)="openFormAddress()">ADD ADDRESS</button>
+            </div>
+            <div class="pb-5 flex space-x-5" *ngIf="isAddAddress">
+                <button
+                class="w-full rounded-lg md:w-1/4 font-mono ring-2 bg-gray-800 ring-gray-800 ring-inset text-white font-medium text-xl py-3 focus:outline-none" (click)="addAddress()">ADD ADDRESS</button>
+                <button
+                class="w-full rounded-lg md:w-1/4 font-mono ring-2 ring-gray-800 ring-inset text-black font-medium text-xl py-3 focus:outline-none" (click)="cancelFormAddress()">CANCEl</button>
+            </div>
+        </div>
+    </div>
+</div>
