@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login-root',
@@ -11,11 +12,15 @@ export class AppComponent implements OnInit {
   email: string
   password: string
 
+  constructor(private router: Router) {}
+
   ngOnInit(){
 
   }
 
   login(){
     console.log(this.email, this.password)
+    localStorage.setItem("token", "It's token")
+    this.router.navigateByUrl("/collections/men")
   }
 }
