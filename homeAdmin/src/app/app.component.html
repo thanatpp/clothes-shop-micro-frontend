@@ -1,0 +1,157 @@
+<div class="flex justify-center mt-8">
+    <div class="w-full px-3 block md:w-3/4">
+        <div class="block md:flex justify-between w-full py-5" *ngIf="!isEdit">
+            <div class="flex w-full">
+                <div class="w-3/4 flex relative">
+                    <input type="text"
+                        class="w-full pr-10 font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-0 focus:border-gray-300 border-2 border-gray-300"
+                        placeholder="Search">
+                    <div class="absolute inset-y-0 right-0 flex items-center rounded-lg">
+                        <button class="p-3 h-full focus:ring-0 focus:outline-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-50" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="pl-3">
+                    <button routerLink="/admin/add"
+                        class="px-4 rounded-lg font-mono bg-gray-800 text-white font-medium text-xl py-3 focus:outline-none">CREATE</button>
+                </div>
+            </div>
+            <div class="block md:flex items-center">
+                <span class="font-mono text-lg px-3">FILTER:</span>
+                <div class="relative w-1/2 md:w-full">
+                    <select
+                        class="border-2 focus:ring-0 focus:border-gray-300 border-gray-300 rounded-lg text-gray-600 py-3 pl-5 pr-10 bg-white focus:outline-none appearance-none">
+                        <option>ALL PRODUCTS</option>
+                        <option>TOPS</option>
+                        <option>BOTTOMS</option>
+                        <option>ACCESSORIES</option>
+                        <option>MEN</option>
+                        <option>WOMEN</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="w-full mt-5" *ngIf="!isEdit">
+            <table class="table-auto w-full border border-gray-300">
+                <thead class="bg-gray-300">
+                    <tr>
+                        <th class="font-mono text-xl">ID</th>
+                        <th class="font-mono text-xl">PRODUCT NAME</th>
+                        <th class="font-mono text-xl">XS</th>
+                        <th class="font-mono text-xl">S</th>
+                        <th class="font-mono text-xl">M</th>
+                        <th class="font-mono text-xl">L</th>
+                        <th class="font-mono text-xl">XL</th>
+                        <th class="font-mono text-xl">XXL</th>
+                        <th class="font-mono text-xl"></th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let item of products; index as i; odd as isOdd">
+                    <tr [ngClass]="isOdd ? 'bg-gray-100' : 'bg-white'">
+                        <td class="text-center text-lg font-mono">{{item.id}}</td>
+                        <td class="text-center text-lg font-mono">{{item.productName}}</td>
+                        <td class="text-center text-lg font-mono">{{item.size.xs}}</td>
+                        <td class="text-center text-lg font-mono">{{item.size.s}}</td>
+                        <td class="text-center text-lg font-mono">{{item.size.m}}</td>
+                        <td class="text-center text-lg font-mono">{{item.size.l}}</td>
+                        <td class="text-center text-lg font-mono">{{item.size.xl}}</td>
+                        <td class="text-center text-lg font-mono">{{item.size.xxl}}</td>
+                        <td class="flex justify-center font-mono">
+                            <button class="px-3 focus:outline-none focus:ring-0" (click)="edit(i)">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                            </button>
+                            <button class="px-3 focus:outline-none focus:ring-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="block md:flex w-full mt-5" *ngIf="isEdit">
+            <div class="block w-full md:w-1/2 px-3">
+                <div class="flex" *ngIf="!img">
+                    <img class="rounded-lg w-full h-auto"
+                        src="https://cdn.shopify.com/s/files/1/0113/4365/9108/products/01_0b78889b-b62c-45d8-a033-7bf4aaae8f33_600x.jpg?v=1603537849">
+                </div>
+                <div class="flex" *ngIf="img">
+                    <img class="rounded-lg w-full h-auto" [src]="img">
+                </div>
+                <div class="mt-5 border">
+                    <input class="hidden" type="file" accept="image/*" id="img" (change)="onFileChange($event)">
+                    <label for="img" class="flex justify-center rounded cursor-pointer bg-blue-400">
+                        <span class="text-center font-mono text-2xl py-2 cursor-pointer">CHANGE IMAGE</span>
+                    </label>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 px-2">
+                <div class="block justify-start mt-5 w-full md:max-w-xl">
+                    <div class="space-y-3 px-3 md:px-10">
+                        <input type="text" [value]="productEdit.productName"
+                            class="w-full font-mono text-4xl font-semibold opacity-80 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300">
+                        <div class="flex items-center">
+                            <input type="text" [value]="productEdit.price"
+                                class="w-2/5 text-right font-mono text-4xl font-semibold opacity-60 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300">
+                            <span class="font-mono text-4xl font-semibold opacity-60 text-center px-3">฿</span>
+                        </div>
+                    </div>
+                    <div class="space-y-3 px-3 md:px-10">
+                        <p class="border-b-2 border-gray-300 mt-8"></p>
+                        <p class="text-3xl font-semibold font-mono pt-5">DETAILS</p>
+                        <textarea [value]="productEdit.details"
+                            class="resize-none w-full h-40 rounded-md focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300 text-xl font-mono font-light subpixel-antialiased leading-relaxed opacity-60"></textarea>
+                        <p class="text-3xl font-semibold font-mono">QUANTITY</p>
+                        <div class="block justify-start">
+                            <div class="block justify-start">
+                                <div class="flex items-center relative w-full">
+                                    <select (change)="sizeChange($event)"
+                                        class="w-2/5 border-2 focus:ring-0 focus:border-gray-300 border-gray-300 rounded-lg text-gray-600 py-2 pl-5 pr-10 bg-white focus:outline-none appearance-none">
+                                        <option value="xs">XS</option>
+                                        <option value="s">S</option>
+                                        <option value="m">M</option>
+                                        <option value="l">L</option>
+                                        <option value="xl">XL</option>
+                                        <option value="xxl">XXL</option>
+                                    </select>
+                                    <span
+                                        class="text-xl font-mono font-light subpixel-antialiased opacity-60 px-4">QUANTITY:
+                                        {{getQuantity()}}</span>
+                                </div>
+                                <div class="flex pt-5">
+                                    <input numbersOnly type="text"
+                                        class="w-2/5 font-mono text-lg font-semibold opacity-60 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300"
+                                        value="0">
+                                    <div class="flex pl-5 space-x-5 items-center">
+                                        <button
+                                            class="px-5 font-mono h-full bg-green-500 rounded-lg focus:outline-none hover:bg-green-400">ADD</button>
+                                        <button
+                                            class="px-2 font-mono h-full bg-red-500 rounded-lg focus:outline-none hover:bg-red-400">DELETE</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-3">
+                            <button
+                                class="w-full rounded-lg font-mono bg-gray-800 text-white font-medium text-xl py-3 focus:outline-none">SAVE</button>
+                            <button
+                                class="w-full rounded-lg font-mono font-medium text-xl ring-2 ring-gray-800 ring-inset py-3 focus:outline-none"
+                                (click)="back()">BACK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
