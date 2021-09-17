@@ -1,6 +1,7 @@
 <single-spa-router>
   <redirect from="/" to="/collections/men"></redirect>
   <redirect from="/account" to="/account/profile"></redirect>
+  <redirect from="/admin" to="/admin/product"></redirect>
   <route path="/collections">
     <header class="sticky top-0 z-50">
       <application name="@thanatpp/navbar"></application>
@@ -44,6 +45,19 @@
       </route>
       <route path="/profile">
         <application name="@thanatpp/profile"></application>
+      </route>
+    </main>
+  </route>
+  <route path="/admin">
+    <header class="sticky top-0 z-50">
+      <application name="@thanatpp/navbarAdmin"></application>
+    </header>
+    <main class="relative max-w-7xl mx-auto">
+      <route path="/product">
+        <application name="@thanatpp/homeAdmin"></application>
+      </route>
+      <route path="/add">
+        <application name="@thanatpp/addProduct"></application>
       </route>
     </main>
   </route>
