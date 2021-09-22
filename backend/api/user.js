@@ -87,7 +87,6 @@ router.route("/login").post(async (req, res) => {
           type: result.type,
         };
         const token = jwt.sign(user, KEY, { expiresIn: "5m" });
-        const now = new Date()
         res.status(200).json({
           status: true,
           data: { user, token },
