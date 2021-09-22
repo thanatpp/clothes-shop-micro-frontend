@@ -18,11 +18,14 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.auth()
+    this.auth();
     this.gender = 'MEN';
     this.onClickMenu = false;
     this.onClickProfile = false;
     this.onClickOutside = false;
+    window.addEventListener('selectGender', () => {
+      this.auth();
+    });
   }
 
   toggleMenu() {
@@ -63,13 +66,13 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('token');
-    this.auth()
+    localStorage.removeItem('user');
+    this.auth();
     this.router.navigateByUrl('/collections/men');
   }
 
-  auth(){
-    if (localStorage.getItem('token') === null) {
+  auth() {
+    if (localStorage.getItem('user') === null) {
       this.isLogin = false;
       this.onClickProfile = false;
     } else {

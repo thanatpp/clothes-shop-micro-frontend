@@ -6,6 +6,16 @@ import {
 } from "single-spa-layout";
 import microfrontendLayout from "./microfrontend-layout.html";
 
+const checkTtl = (ttl) => {
+  console.log(Date.now(), ttl)
+  if (Date.now() > ttl) {
+    localStorage.removeItem('user');
+    const logout = new CustomEvent('logout');
+    window.dispatchEvent(logout)
+    return true
+  }
+}
+ 
 window.addEventListener('single-spa:before-routing-event', (e: CustomEvent) => {
   const {
     originalEvent,
@@ -18,13 +28,35 @@ window.addEventListener('single-spa:before-routing-event', (e: CustomEvent) => {
     cancelNavigation,
   } = e.detail;
 
-  if(localStorage.getItem('token') === null){
-    if(new URL(newUrl).pathname  === '/account/profile'){
+  const path = new URL(newUrl).pathname
+  const index = path.split('/')
+  const user = JSON.parse(localStorage.getItem('user'))
+
+  if(user === null){
+    if(index[1]  === 'account' || index[1]  === 'admin'){
       navigateToUrl('/login')
     }
-  }else if(localStorage.getItem('token') !== null){
-    if(new URL(newUrl).pathname  === '/login'){
-      navigateToUrl('/')
+  }else{
+    if(index[1]  === 'login'){
+      if(user.data.user.type === 'customer'){
+        navigateToUrl('/collections/men')
+      }else{
+        navigateToUrl('/admin/product')
+      }
+    }else if(index[1] === 'admin'){
+      checkTtl(user.ttl)
+      if(user.data.user.type !== 'admin'){
+        navigateToUrl('/collections/men')
+      }else{
+        navigateToUrl(path)
+      }
+    }else if(index[1] === 'account' || index[1] === 'collections'){
+      checkTtl(user.ttl)
+      if(user.data.user.type !== 'customer'){
+        navigateToUrl('/admin/product')
+      }else{
+        navigateToUrl(path)
+      }
     }
   }
 });
