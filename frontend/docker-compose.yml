@@ -1,0 +1,105 @@
+version: '3.7'
+services:
+  navbar:
+    container_name: navbar
+    build:
+      context: ./navbar/.
+      dockerfile: Dockerfile
+    ports:
+      - '4201:80'
+
+  filterbar:
+    container_name: filterbar
+    build:
+      context: ./filterbar/.
+      dockerfile: Dockerfile
+    ports:
+      - '4202:80'
+
+  listitem:
+    container_name: listitem
+    build:
+      context: ./listitem/.
+      dockerfile: Dockerfile
+    ports:
+      - '4203:80'
+
+  product:
+    container_name: product
+    build:
+      context: ./product/.
+      dockerfile: Dockerfile
+    ports:
+      - '4204:80'
+
+  cart:
+    container_name: cart
+    build:
+      context: ./cart/.
+      dockerfile: Dockerfile
+    ports:
+      - '4205:80'
+
+  login:
+    container_name: login
+    build:
+      context: ./login/.
+      dockerfile: Dockerfile
+    ports:
+      - '4206:80'
+
+  registry:
+    container_name: registry
+    build:
+      context: ./registry/.
+      dockerfile: Dockerfile
+    ports:
+      - '4207:80'
+
+  purchase-history:
+    container_name: purchase-history
+    build:
+      context: ./purchase-history/.
+      dockerfile: Dockerfile
+    ports:
+      - '4208:80'
+
+  profile:
+    container_name: profile
+    build:
+      context: ./profile/.
+      dockerfile: Dockerfile
+    ports:
+      - '4209:80'
+
+  navbar-admin:
+    container_name: navbar-admin
+    build:
+      context: ./navbarAdmin/.
+      dockerfile: Dockerfile
+    ports:
+      - '4210:80'
+
+  home-admin:
+    container_name: home-admin
+    build:
+      context: ./homeAdmin/.
+      dockerfile: Dockerfile
+    ports:
+      - '4211:80'
+
+  add-product:
+    container_name: add-product
+    build:
+      context: ./addProduct/.
+      dockerfile: Dockerfile
+    ports:
+      - '4212:80'
+      
+  order:
+    container_name: order
+    build:
+      context: ./order/.
+      dockerfile: Dockerfile
+    ports:
+      - '4213:80'
