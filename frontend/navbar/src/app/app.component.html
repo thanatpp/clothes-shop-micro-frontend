@@ -16,12 +16,7 @@
         </div>
       </div>
       <div class="flex items-center space-x-1 relative pr-6">
-        <button type="button" class="hidden md:flex focus:outline-none" id="menu-button" (click)="toggleProfile()" (clickOutside)="onClickedOutsideProfile($event)" *ngIf="isLogin">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        </button>
-        <button routerLink="/login" type="button" class="hidden md:flex focus:outline-none" id="menu-button" *ngIf="!isLogin">
+        <button type="button" class="hidden md:flex focus:outline-none" id="menu-button" (click)="toggleProfile()" (clickOutside)="onClickedOutsideProfile($event)">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
@@ -40,8 +35,8 @@
     </div>
 
     <!-- drop down profile menu -->
-    <div class="flex justify-end mr-16" *ngIf="onClickProfile">
-      <div class="md:block hidden absolute top-16 border border-gray-200 rounded-md shadow-lg bg-white w-max">
+    <div class="flex justify-end mr-16">
+      <div class="hidden md:block w-max absolute top-16 border border-gray-200 rounded-md shadow-lg bg-white"  *ngIf="onClickProfile">
         <a routerLink="/account/profile" (click)="selectProfile()" class="block px-7 py-2 hover:bg-gray-100">Profile</a>
         <a routerLink="/account/purchase-history" class="block px-7 py-2 hover:bg-gray-100">Purchase History</a>
         <a class="cursor-pointer block px-7 py-2 hover:bg-gray-100" (click)="logout()">Logout</a>
@@ -52,10 +47,10 @@
     <div class="md:hidden absolute bg-white w-screen border-b border-gray-200" *ngIf="onClickMenu">
         <a routerLink="/collections/men" (click)="selectMen()" class="block px-7 py-2 hover:bg-gray-100 font-medium">Men</a>
         <a routerLink="/collections/women" (click)="selectWomen()" class="block px-7 py-2 hover:bg-gray-100 font-medium">Women</a>
-        <a routerLink="/account/cart" class="block px-7 py-2 hover:bg-gray-100 font-medium">Cart</a>
-        <a routerLink="/account/profile" class="block px-7 py-2 hover:bg-gray-100 font-medium">Profile</a>
-        <a routerLink="/account/purchase-history" class="block px-7 py-2 hover:bg-gray-100 font-medium">Purchase History</a>
-        <a class="cursor-pointer block px-7 py-2 hover:bg-gray-100 font-medium" (click)="logout()">Logout</a>
+        <a routerLink="/account/cart" class="block px-7 py-2 hover:bg-gray-100 font-medium" *ngIf="isLogin">Cart</a>
+        <a routerLink="/account/profile" class="block px-7 py-2 hover:bg-gray-100 font-medium" *ngIf="isLogin">Profile</a>
+        <a routerLink="/account/purchase-history" class="block px-7 py-2 hover:bg-gray-100 font-medium" *ngIf="isLogin">Purchase History</a>
+        <a class="cursor-pointer block px-7 py-2 hover:bg-gray-100 font-medium" *ngIf="isLogin" (click)="logout()">Logout</a>
     </div>
   </div>
 </nav>

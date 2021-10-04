@@ -1,12 +1,12 @@
 <div class="flex mt-8">
   <div class="flex flex-wrap">
-    <div class="px-3 py-3" *ngFor="let item of items; index as i">
-      <div routerLink="/collections/product" class="w-56 h-auto px-3 py-3 bg-white rounded-xl shadow-xl hover:scale-105 transition-all transform duration-500 cursor-pointer" (click)="clickItem(i)">
+    <div class="px-3 py-3" *ngFor="let item of products; index as i">
+      <div class="w-56 h-auto px-3 py-3 bg-white rounded-xl shadow-xl hover:scale-105 transition-all transform duration-500 cursor-pointer" (click)="clickItem(i)">
         <a>
-          <img src="https://cdn.shopify.com/s/files/1/0113/4365/9108/products/01_0b78889b-b62c-45d8-a033-7bf4aaae8f33_600x.jpg?v=1603537849">
+          <img src={{item.img}}>
         </a>
         <p class="text-center font-mono text-base tracking-wide mt-3">{{item.name}}</p>
-        <p class="text-center font-mono text-base opacity-70">{{item.price}} ฿</p>
+        <p class="text-center font-mono text-base opacity-70">{{price(i)}} ฿</p>
        </div>
     </div>
   </div>

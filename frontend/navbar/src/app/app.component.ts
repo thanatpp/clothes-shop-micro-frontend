@@ -1,6 +1,5 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-//import { hello } from '@thanatpp/utility';
 
 @Component({
   selector: 'navbar-root',
@@ -8,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+
   title: 'navbar';
   onClickProfile: boolean;
   onClickMenu: boolean;
@@ -19,11 +19,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.auth();
-    this.gender = 'MEN';
+    this.gender = 'men';
     this.onClickMenu = false;
     this.onClickProfile = false;
     this.onClickOutside = false;
-    window.addEventListener('selectGender', () => {
+    window.addEventListener('logout', () => {
       this.auth();
     });
   }
@@ -33,7 +33,12 @@ export class AppComponent implements OnInit {
   }
 
   toggleProfile() {
-    this.onClickProfile = !this.onClickProfile;
+    if(this.isLogin !== false){
+      this.onClickProfile = !this.onClickProfile;
+    }else{
+      this.router.navigateByUrl('/login')
+    }
+    console.log(this.onClickProfile)
   }
 
   selectProfile() {

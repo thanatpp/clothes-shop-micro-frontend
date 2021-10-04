@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProductService } from './services/product.service';
 
 @Component({
   selector: 'listitem-root',
@@ -8,42 +9,52 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   
+  products: any
   gender: string
-  type: string
-  items: any[]
-  showDetail: boolean
+  type: string = "all"
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private productService: ProductService) {}
 
   ngOnInit(){
-    this.type = "ALL"
     this.checkUrl()
     window.addEventListener("selectGender", (e: CustomEvent) => {
         this.gender = e.detail
+        this.getProduct()
     })
     window.addEventListener("selectType", (e: CustomEvent) => {
       this.type = e.detail
+      this.getProduct()
     })
-
-    //fake items
-    this.items = [{name: "THE GODFAGLE TEE", price: 320}, {name: "THE GODFAGLE TEE", price: 790}, {name: "THE GODFAGLE TEE", price: 199}, 
-                  {name: "THE GODFAGLE TEE", price: 690}, {name: "THE GODFAGLE TEE", price: 690}, {name: "THE GODFAGLE TEE", price: 690},
-                  {name: "THE GODFAGLE TEE", price: 690}, {name: "THE GODFAGLE TEE", price: 690}, {name: "THE GODFAGLE TEE", price: 690}]
-     
+  }
+  
+  price(i: any){
+    return Intl.NumberFormat().format(this.products[i].price)
   }
 
   checkUrl(){
     const url = window.location.href.split("/")
-    if(url[3] == "women"){
+    console.log(url)
+    if(url[4] == "women"){
       this.gender = "women"
     }else{
       this.gender = "men"
     }
+    this.getProduct()
+  }
+
+  getProduct(){
+    this.productService.getProduct(this.gender, this.type).subscribe(
+      (data) => {
+        this.products = data.data;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   clickItem(i: any){
-    console.log("click item ", i)
-    localStorage.setItem("product_id", i)
-    //window.location.href = "/product"
+    localStorage.setItem("product_id", this.products[i]._id)
+    this.router.navigateByUrl("/collections/product/",this.products[i]._id)
   }
 }

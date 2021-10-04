@@ -7,7 +7,6 @@ import {
 import microfrontendLayout from "./microfrontend-layout.html";
 
 const checkTtl = (ttl) => {
-  console.log(Date.now(), ttl)
   if (Date.now() > ttl) {
     localStorage.removeItem('user');
     const logout = new CustomEvent('logout');
@@ -36,6 +35,8 @@ window.addEventListener('single-spa:before-routing-event', (e: CustomEvent) => {
     if(index[1]  === 'account' || index[1]  === 'admin'){
       navigateToUrl('/login')
     }
+  }else if(localStorage.getItem('product_id') === null){
+    navigateToUrl(oldUrl)
   }else{
     if(index[1]  === 'login'){
       if(user.data.user.type === 'customer'){

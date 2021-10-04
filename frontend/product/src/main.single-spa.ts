@@ -27,9 +27,4 @@ const lifecycles = singleSpaAngular({
 
 export const bootstrap = lifecycles.bootstrap;
 export const mount = lifecycles.mount;
-
-export function unmount() {
-  return Promise.resolve().then(() => {
-    localStorage.removeItem("product_id")
-  });
-}
+export const unmount = lifecycles.unmount;
