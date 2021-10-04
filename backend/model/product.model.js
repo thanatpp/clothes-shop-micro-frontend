@@ -30,18 +30,40 @@ const productSchema = Schema(
       type: String,
       required: true,
     },
-    size: [
-      {
-        name: {
-            type: String,
-            required: true,
-        },
-        quaintity: {
-            type: Number,
-            required: true,
-        }
+    size: {
+      xxs: {
+        type: Number,
+        default: 0,
       },
-    ],
+      xs: {
+        type: Number,
+        default: 0,
+      },
+      xs: {
+        type: Number,
+        default: 0,
+      },
+      s: {
+        type: Number,
+        default: 0,
+      },
+      m: {
+        type: Number,
+        default: 0,
+      },
+      l: {
+        type: Number,
+        default: 0,
+      },
+      xl: {
+        type: Number,
+        default: 0,
+      },
+    },
+    quantity: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     collection: "Product",

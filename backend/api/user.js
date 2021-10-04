@@ -22,11 +22,6 @@ const compareHash = async (password, hash) => {
   });
 };
 
-const getTime = async () => {
-  const date = new Date()
-  return date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + data.getMinis()
-}
-
 const addUser = async (data) => {
   return new Promise((resolve, reject) => {
     var user = new User(data);
@@ -90,7 +85,7 @@ router.route("/login").post(async (req, res) => {
         res.status(200).json({
           status: true,
           data: { user, token },
-          ttl: Date.now() + (60 * 1000),
+          ttl: Date.now() + (5 * 60 * 1000),
         });
       } else {
         res.status(400).json({
