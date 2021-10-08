@@ -29,6 +29,8 @@ app.use("/api/gender", require("./api/gender"));
 app.use("/api/type", require("./api/type"));
 app.use("/api/product", require("./api/product"));
 app.use("/api/cart", require("./api/cart"));
+app.use("/api/address", require("./api/address"));
+app.use("/api/order", require("./api/order"));
 
 app.listen(8080, () => {
     console.log('Application is running on port 8080')

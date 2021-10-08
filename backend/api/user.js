@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../model/user.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const authorization = require("../config/auth");
 const KEY = `${process.env.SECRET_KEY}`;
 
 const makeHash = async (password) => {
@@ -35,6 +36,22 @@ const addUser = async (data) => {
   });
 };
 
+const findOneUserById = async (id) => {
+  return new Promise((resolve, reject) => {
+    User.findById(id, (err, data) => {
+      if(err){
+        reject(err)
+      }else{
+        if(data){
+          resolve(data)
+        }else{
+          reject(new Error("User not found"));
+        }
+      }
+    })
+  })
+}
+
 const findOneUser = async (email) => {
   return new Promise(async (resolve, reject) => {
     User.findOne({ email: email }, (err, data) => {
@@ -50,6 +67,18 @@ const findOneUser = async (email) => {
     });
   });
 };
+
+const updateUserById = async (id, data) => {
+  return new Promise((resolve, reject) => {
+    User.findByIdAndUpdate(id, data, (err, data) => {
+      if(err){
+        reject(err)
+      }else{
+        resolve("Update user successfully")
+      }
+    })
+  })
+}
 
 router.route("/add").post((req, res) => {
   makeHash(req.body.password).then((hash) => {
@@ -69,6 +98,36 @@ router.route("/add").post((req, res) => {
         });
       });
   });
+});
+
+router.route("/update/id/:id").put(authorization, (req, res) => {
+  updateUserById(req.params.id, req.body).then(
+    (result) => {
+      res.status(200).json({
+        status: true,
+        message: result,
+      });
+    }).catch((err) => {
+      res.status(400).json({
+        status: false,
+        message: "Cannot update user",
+      });
+    })
+});
+
+router.route("/get/id/:id").get(authorization, (req, res) => {
+  findOneUserById(req.params.id).then(
+    (result) => {
+      res.status(200).json({
+        status: true,
+        data: result,
+      });
+    }).catch((err) => {
+      res.status(400).json({
+        status: false,
+        message: err.message,
+      });
+    })
 });
 
 router.route("/login").post(async (req, res) => {

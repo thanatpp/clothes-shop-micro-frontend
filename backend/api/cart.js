@@ -1,8 +1,6 @@
-const e = require("express");
 var express = require("express");
 const router = express.Router();
 const authorization = require("../config/auth");
-const { populate } = require("../model/cart.model");
 const Cart = require("../model/cart.model");
 
 const addCart = async (data) => {
