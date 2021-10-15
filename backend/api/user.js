@@ -140,11 +140,11 @@ router.route("/login").post(async (req, res) => {
           _id: result._id,
           type: result.type,
         };
-        const token = jwt.sign(user, KEY, { expiresIn: "5m" });
+        const token = jwt.sign(user, KEY, { expiresIn: "10m" });
         res.status(200).json({
           status: true,
           data: { user, token },
-          ttl: Date.now() + (5 * 60 * 1000),
+          ttl: Date.now() + (10 * 60 * 1000),
         });
       } else {
         res.status(400).json({

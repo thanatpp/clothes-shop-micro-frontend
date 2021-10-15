@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 3000,
+    timer: 2000,
     timerProgressBar: true,
   });
 
@@ -104,6 +104,7 @@ export class AppComponent implements OnInit {
           this.userAddress = data.data;
         } else {
           this.isNoAddress = true;
+          this.userAddress = data.data;
         }
       },
       (err) => {

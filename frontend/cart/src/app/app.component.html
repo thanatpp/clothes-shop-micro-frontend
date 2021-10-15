@@ -69,13 +69,28 @@
     </div>
     <div class="flex flex-col md:w-2/6 w-full px-3 py-8">
         <div class="flex flex-col bg-white shadow-lg w-full rounded-lg py-3 border-2 border-gray-700">
-            <a class="px-5 pt-8 text-2xl font-semibold font-mono opacity-60">ORDER SUMMARY {{totalAmount()}}
+            <a class="px-5 pt-8 text-2xl font-semibold font-mono opacity-60">ORDER SUMMARY {{totalAmount}}
                 ITEMS</a><br>
-            <a class="px-5 pb-8 text-3xl font-bold font-mono">ORDER TOTAL {{totalPrice()}} ฿</a>
+            <a class="px-5 pb-8 text-3xl font-bold font-mono">ORDER TOTAL {{totalPrice}} ฿</a>
+        </div>
+        <div class="flex flex-col bg-white shadow-lg w-full rounded-lg py-3 mt-3 border-2 border-gray-700" *ngIf="selectAddress">
+            <div class="flex justify-between">
+                <a class="px-5 text-2xl font-semibold font-mono opacity-60">SELECT ADDRESS</a>
+                <button routerLink="/account/profile" class="bg-green-400 px-3 rounded-lg focus:outline-none mr-6">ADD</button>
+            </div>
+            <div class="px-5 py-3" *ngIf="!addressIsNull">
+                <select [(ngModel)]="indexAddress" class="w-full border-2 focus:ring-0 focus:border-gray-300 border-gray-300 rounded-lg text-gray-600 bg-white focus:outline-none appearance-none" (ngModel)="indexAddress">
+                    <option *ngFor="let item of address; index as i;" [value]="i">{{item.firstName}} {{item.lastName}}: {{item.detail}} {{item.district}}</option>
+                </select>
+            </div>
+            <div class="px-5 py-3" *ngIf="addressIsNull">
+                <a class="text-xl font-mono opacity-60">Please add a shipping address.</a>
+            </div>
         </div>
         <div>
             <div class="mt-8 flex flex-wrap gap-2">
-                <button class="w-full font-mono bg-gray-800 text-white font-medium text-xl py-3 rounded-lg focus:outline-none">CHECKOUT</button>
+                <button class="w-full font-mono bg-gray-800 text-white font-medium text-xl py-3 rounded-lg focus:outline-none" (click)="checkOut()" *ngIf="!isNull">CHECKOUT</button>
+                <button class="w-full font-mono bg-gray-600 text-white font-medium text-xl py-3 rounded-lg cursor-not-allowed focus:outline-none" *ngIf="isNull">CHECKOUT</button>
                 <button routerLink="/collections/men" class="w-full font-mono font-medium text-xl ring-2 ring-gray-800 ring-inset py-3 rounded-lg focus:outline-none">CONTINUE
                     SHOPPING</button>
             </div>

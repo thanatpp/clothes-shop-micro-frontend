@@ -3,11 +3,11 @@
         <div class="block md:flex justify-between w-full py-5" *ngIf="!isEdit">
             <div class="flex w-full">
                 <div class="w-3/4 flex relative">
-                    <input type="text"
+                    <input type="text" [(ngModel)]="searchText"
                         class="w-full pr-10 font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-0 focus:border-gray-300 border-2 border-gray-300"
                         placeholder="Search by Product Name">
                     <div class="absolute inset-y-0 right-0 flex items-center rounded-lg">
-                        <button class="p-3 h-full focus:ring-0 focus:outline-none">
+                        <button class="p-3 h-full focus:ring-0 focus:outline-none" (click)="search()">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-50" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -24,45 +24,49 @@
             <div class="block md:flex items-center">
                 <span class="font-mono text-lg px-3">FILTER:</span>
                 <div class="relative w-1/2 md:w-full">
-                    <select
+                    <select (change)="filterChange($event)"
                         class="border-2 focus:ring-0 focus:border-gray-300 border-gray-300 rounded-lg text-gray-600 py-3 pl-5 pr-10 bg-white focus:outline-none appearance-none">
-                        <option>ALL PRODUCTS</option>
-                        <option>TOPS</option>
-                        <option>BOTTOMS</option>
-                        <option>ACCESSORIES</option>
-                        <option>MEN</option>
-                        <option>WOMEN</option>
+                        <option value="all">ALL PRODUCTS</option>
+                        <option value="tops">TOPS</option>
+                        <option value="bottoms">BOTTOMS</option>
+                        <option value="accessories">ACCESSORIES</option>
+                        <option value="men">MEN</option>
+                        <option value="women">WOMEN</option>
                     </select>
                 </div>
             </div>
         </div>
         <div class="w-full mt-5" *ngIf="!isEdit">
-            <table class="table-auto w-full border border-gray-300">
+            <table class="table-auto w-full border border-gray-300" *ngIf="!productsIsNull">
                 <thead class="bg-gray-300">
                     <tr>
-                        <th class="font-mono text-xl">ID</th>
                         <th class="font-mono text-xl">PRODUCT NAME</th>
+                        <th class="font-mono text-xl">GENDER</th>
+                        <th class="font-mono text-xl">TYPE</th>
+                        <th class="font-mono text-xl">XXS</th>
                         <th class="font-mono text-xl">XS</th>
                         <th class="font-mono text-xl">S</th>
                         <th class="font-mono text-xl">M</th>
                         <th class="font-mono text-xl">L</th>
                         <th class="font-mono text-xl">XL</th>
-                        <th class="font-mono text-xl">XXL</th>
+                        <th class="font-mono text-xl">QUANTITY</th>
                         <th class="font-mono text-xl"></th>
                     </tr>
                 </thead>
-                <tbody *ngFor="let item of products; index as i; odd as isOdd">
+                <tbody *ngFor="let item of _products; index as i; odd as isOdd">
                     <tr [ngClass]="isOdd ? 'bg-gray-100' : 'bg-white'">
-                        <td class="text-center text-lg font-mono">{{item.id}}</td>
-                        <td class="text-center text-lg font-mono">{{item.productName}}</td>
+                        <td class="text-center text-lg font-mono">{{item.name}}</td>
+                        <td class="text-center text-lg font-mono">{{item.gender.name}}</td>
+                        <td class="text-center text-lg font-mono">{{item.type.name}}</td>
+                        <td class="text-center text-lg font-mono">{{item.size.xxs}}</td>
                         <td class="text-center text-lg font-mono">{{item.size.xs}}</td>
                         <td class="text-center text-lg font-mono">{{item.size.s}}</td>
                         <td class="text-center text-lg font-mono">{{item.size.m}}</td>
                         <td class="text-center text-lg font-mono">{{item.size.l}}</td>
                         <td class="text-center text-lg font-mono">{{item.size.xl}}</td>
-                        <td class="text-center text-lg font-mono">{{item.size.xxl}}</td>
+                        <td class="text-center text-lg font-mono">{{item.quantity}}</td>
                         <td class="flex justify-center font-mono">
-                            <button class="px-3 focus:outline-none focus:ring-0" (click)="edit(i)">
+                            <button class="px-3 focus:outline-none focus:ring-0" (click)="edit(item._id)">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -80,15 +84,44 @@
                     </tr>
                 </tbody>
             </table>
+            <table class="table-auto w-full border border-gray-300" *ngIf="productsIsNull">
+                <thead class="bg-gray-300">
+                    <tr>
+                        <th class="font-mono text-xl">PRODUCT NAME</th>
+                        <th class="font-mono text-xl">GENDER</th>
+                        <th class="font-mono text-xl">TYPE</th>
+                        <th class="font-mono text-xl">XXS</th>
+                        <th class="font-mono text-xl">XS</th>
+                        <th class="font-mono text-xl">S</th>
+                        <th class="font-mono text-xl">M</th>
+                        <th class="font-mono text-xl">L</th>
+                        <th class="font-mono text-xl">XL</th>
+                        <th class="font-mono text-xl">QUANTITY</th>
+                        <th class="font-mono text-xl"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr [ngClass]="isOdd ? 'bg-gray-100' : 'bg-white'">
+                        <td class="text-center text-lg font-mono">Product not found.</td>
+                        <td class="text-center text-lg font-mono"></td>
+                        <td class="text-center text-lg font-mono"></td>
+                        <td class="text-center text-lg font-mono"></td>
+                        <td class="text-center text-lg font-mono"></td>
+                        <td class="text-center text-lg font-mono"></td>
+                        <td class="text-center text-lg font-mono"></td>
+                        <td class="text-center text-lg font-mono"></td>
+                        <td class="text-center text-lg font-mono"></td>
+                        <td class="text-center text-lg font-mono"></td>
+                        <td class="flex justify-center font-mono"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="block md:flex w-full mt-5" *ngIf="isEdit">
+        <div class="block md:flex w-full mt-5" *ngIf="isEdit && productEdit">
             <div class="block w-full md:w-1/2 px-3">
-                <div class="flex" *ngIf="!img">
+                <div class="flex">
                     <img class="rounded-lg w-full h-auto"
-                        src="https://cdn.shopify.com/s/files/1/0113/4365/9108/products/01_0b78889b-b62c-45d8-a033-7bf4aaae8f33_600x.jpg?v=1603537849">
-                </div>
-                <div class="flex" *ngIf="img">
-                    <img class="rounded-lg w-full h-auto" [src]="img">
+                        src="{{productEdit.img}}">
                 </div>
                 <div class="mt-5 border">
                     <input class="hidden" type="file" accept="image/*" id="img" (change)="onFileChange($event)">
@@ -100,10 +133,10 @@
             <div class="w-full md:w-1/2 px-2">
                 <div class="block justify-start mt-5 w-full md:max-w-xl">
                     <div class="space-y-3 px-3 md:px-10">
-                        <input type="text" [value]="productEdit.productName"
+                        <input type="text" [(ngModel)]="productEdit.name"
                             class="w-full font-mono text-4xl font-semibold opacity-80 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300">
                         <div class="flex items-center">
-                            <input type="text" [value]="productEdit.price"
+                            <input type="text" [(ngModel)]="productEdit.price"
                                 class="w-2/5 text-right font-mono text-4xl font-semibold opacity-60 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300">
                             <span class="font-mono text-4xl font-semibold opacity-60 text-center px-3">฿</span>
                         </div>
@@ -111,41 +144,44 @@
                     <div class="space-y-3 px-3 md:px-10">
                         <p class="border-b-2 border-gray-300 mt-8"></p>
                         <p class="text-3xl font-semibold font-mono pt-5">DETAILS</p>
-                        <textarea [value]="productEdit.details"
+                        <textarea [(ngModel)]="productEdit.detail"
                             class="resize-none w-full h-40 rounded-md focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300 text-xl font-mono font-light subpixel-antialiased leading-relaxed opacity-60"></textarea>
                         <p class="text-3xl font-semibold font-mono">QUANTITY</p>
                         <div class="block justify-start">
                             <div class="block justify-start">
                                 <div class="flex items-center relative w-full">
-                                    <select (change)="sizeChange($event)"
+                                    <select (change)="sizeChange($event)"  *ngIf="productEdit.type.name !== 'accessories'"
                                         class="w-2/5 border-2 focus:ring-0 focus:border-gray-300 border-gray-300 rounded-lg text-gray-600 py-2 pl-5 pr-10 bg-white focus:outline-none appearance-none">
+                                        <option value="xxs">XXS</option>
                                         <option value="xs">XS</option>
                                         <option value="s">S</option>
                                         <option value="m">M</option>
                                         <option value="l">L</option>
                                         <option value="xl">XL</option>
-                                        <option value="xxl">XXL</option>
                                     </select>
-                                    <span
+                                    <span  *ngIf="productEdit.type.name !== 'accessories'"
                                         class="text-xl font-mono font-light subpixel-antialiased opacity-60 px-4">QUANTITY:
                                         {{getQuantity()}}</span>
+                                    <span  *ngIf="productEdit.type.name === 'accessories'"
+                                        class="text-xl font-mono font-light subpixel-antialiased opacity-60 py-3">QUANTITY:
+                                        {{productEdit.quantity}}</span>
                                 </div>
                                 <div class="flex pt-5">
-                                    <input numbersOnly type="text"
+                                    <input numbersOnly type="text" [(ngModel)]="quantity"
                                         class="w-2/5 font-mono text-lg font-semibold opacity-60 rounded-lg focus:ring-gray-800 focus-within:border-gray-800 border-2 border-gray-300"
                                         value="0">
                                     <div class="flex pl-5 space-x-5 items-center">
                                         <button
-                                            class="px-5 font-mono h-full bg-green-500 rounded-lg focus:outline-none hover:bg-green-400">ADD</button>
+                                            class="px-5 font-mono h-full bg-green-500 rounded-lg focus:outline-none hover:bg-green-400" (click)="incProduct()">ADD</button>
                                         <button
-                                            class="px-2 font-mono h-full bg-red-500 rounded-lg focus:outline-none hover:bg-red-400">DELETE</button>
+                                            class="px-5 font-mono h-full bg-red-500 rounded-lg focus:outline-none hover:bg-red-400" (click)="decProduct()">DEC</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="flex flex-wrap gap-3">
                             <button
-                                class="w-full rounded-lg font-mono bg-gray-800 text-white font-medium text-xl py-3 focus:outline-none">SAVE</button>
+                                class="w-full rounded-lg font-mono bg-gray-800 text-white font-medium text-xl py-3 focus:outline-none"(click)="save()">SAVE</button>
                             <button
                                 class="w-full rounded-lg font-mono font-medium text-xl ring-2 ring-gray-800 ring-inset py-3 focus:outline-none"
                                 (click)="back()">BACK</button>

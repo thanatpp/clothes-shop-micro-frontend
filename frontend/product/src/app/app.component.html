@@ -41,7 +41,7 @@
             </div>
             <div class="flex h-full" *ngIf="product.size.xs > 0">
                <input type="radio" name="themeToggler" id="themeToggler1" class="peer hidden" value="xs"
-                  (change)="onSizeChange($event.target.value)" />
+                  (change)="onSizeChange($event.target.value)"/>
                <label for="themeToggler1"
                   class="h-16 w-16 rounded-lg shadow-lg hover:bg-gray-200 bg-white peer-checked:outline-none peer-checked:ring-4 peer-checked:ring-gray-600 hover:cursor-pointer flex items-center justify-center">
                   <p>XS</p>
@@ -157,7 +157,9 @@
             <p class="text-l text-red-800 font-mono font-light subpixel-antialiased leading-relaxed pl-5 pt-6"
                *ngIf="!isAccessories && !isSelectSize">*Please select a size.</p>
             <p class="text-l text-red-800 font-mono font-light subpixel-antialiased leading-relaxed pl-5 pt-6"
-               *ngIf="inStock || isAccessories">In Stock: {{inStock}}</p>
+               *ngIf="!isAccessories && inStock">In Stock: {{inStock}}</p>
+            <p class="text-l text-red-800 font-mono font-light subpixel-antialiased leading-relaxed pl-5 pt-6"
+               *ngIf="isAccessories">In Stock: {{product.quantity}}</p>
          </div>
          <div class="flex w-40 bg-white rounded-lg shadow-lg border-2 border-gray-300 divide-x-2 divide-gray-300">
             <div class="px-4 py-3 hover:cursor-pointer" (click)="dec()">

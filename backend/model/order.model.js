@@ -25,7 +25,7 @@ const orderSchema = Schema(
       ref: "UserAddress",
       required: true,
     },
-    datetime: {
+    date: {
       type: String,
       required: true,
     },
