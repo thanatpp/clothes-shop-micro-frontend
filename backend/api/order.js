@@ -131,6 +131,21 @@ const getOrder = async (data) => {
   });
 };
 
+const getAllOrder = async () => {
+  return new Promise((resolve, reject) => {
+    Order.find({}, (err, data) => {
+      if (err) {
+        reject("Cannot get Order.");
+      } else {
+        resolve(data);
+      }
+    })
+    .populate({ path: "product", model: "Product", populate: [{ path: "type", model: "Type"}, { path: "gender", model: "Gender"}]})
+    .populate({ path: "user", model: "User" })
+    .populate({ path: "address", model: "UserAddress", populate: { path: "address", model: "Address"}});
+  });
+};
+
 router.route("/add").post(authorization, (req, res) => {
   updateQuantityProduct(req.body.data)
     .then((result) => {
@@ -163,6 +178,27 @@ router.route("/add").post(authorization, (req, res) => {
         message: err.message,
       });
     });
+});
+
+router.route("/get").get(authorization, (req, res) => {
+  getAllOrder().then((result) => {
+    if(result.length !== 0){
+      res.status(200).json({
+        status: true,
+        data: result,
+      });
+    }else{
+      res.status(200).json({
+        status: false,
+        data: result,
+      });
+    }
+  }).catch((err) => {
+    res.status(400).json({
+      status: false,
+      message: err,
+    });
+  });
 });
 
 router.route("/get/user/:id").get(authorization, (req, res) => {

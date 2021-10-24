@@ -52,8 +52,6 @@ const findOneType = async (data) => {
         }
       }
     })
-      .populate({ path: "gender", model: "Gender" })
-      .populate({ path: "type", model: "Type" });
   });
 };
 
@@ -102,13 +100,12 @@ const findOneProductByGenderType = async (gender, type) => {
   return new Promise((resolve, reject) => {
     Product.find({ gender: gender, type: type }, (err, data) => {
       if (err) {
+        console.log(err)
         reject(new Error("Product not found"));
       } else {
         resolve(data);
       }
     })
-      .populate({ path: "gender", model: "Gender" })
-      .populate({ path: "type", model: "Type" });
   });
 };
 
@@ -133,6 +130,18 @@ const updateProduct = async (id, data) => {
     );
   });
 };
+
+const deleteProduct = async (id) => {
+  return new Promise((resolve, reject) => {
+    Product.findByIdAndDelete(id, (err, data) => {
+      if(err){
+        reject(err)
+      }else{
+        resolve("Delete product successfully.")
+      }
+    })
+  })
+}
 
 const incProduct = async (id, type, size, quantity) => {
   return new Promise((resolve, reject) => {
@@ -470,6 +479,20 @@ router.route("/update/inc/:id").put(authorization, (req, res) => {
     });
 });
 
+router.route("/delete/id/:id").delete(authorization, (req, res) => {
+  deleteProduct(req.params.id).then((result) => {
+    res.status(200).json({
+      status: true,
+      message: result,
+    });
+  }).catch((err) => {
+    res.status(404).json({
+      status: false,
+      message: err.message,
+    });
+  })
+});
+
 router.route("/get/gender/:gender/type/:type").get(async (req, res) => {
   try {
     const resultGender = await findOneGender(String(req.params.gender));
@@ -497,7 +520,7 @@ router.route("/get/gender/:gender/type/:type").get(async (req, res) => {
   }
 });
 
-router.route("/add").post(async (req, res) => {
+router.route("/add").post(authorization, async (req, res) => {
   try {
     const resultGender = await findOneGender(req.body.gender);
     const resultType = await findOneType(req.body.type);
