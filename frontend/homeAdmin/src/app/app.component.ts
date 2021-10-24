@@ -31,6 +31,14 @@ export class AppComponent implements OnInit {
     timerProgressBar: true,
   });
 
+  swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'w-20 h-10 bg-green-400',
+      cancelButton: 'w-20 h-10 bg-red-400'
+    },
+    buttonsStyling: false
+  })
+
   constructor(private router: Router, private productService: ProductService) {}
 
   editProductForm = new FormGroup({
@@ -352,5 +360,47 @@ export class AppComponent implements OnInit {
 
   back() {
     this.isEdit = false;
+  }
+
+  delete(id){
+    this.swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.productService.deleteProduct(id, this.token).subscribe(
+          (data) => {
+            if (data.status === true) {
+              this.Toast.fire({
+                icon: 'success',
+                title: 'Delete product successfully.',
+              });
+              this.getProduct();
+            }else{
+              this.Toast.fire({
+                icon: 'error',
+                title: 'Cannot delete product.',
+              });
+            }
+          },
+          (err) => {
+            if (err.error.status === 401) {
+              localStorage.removeItem('user');
+              this.router.navigateByUrl('/login');
+            }else{
+              this.Toast.fire({
+                icon: 'error',
+                title: 'Cannot delete product.',
+              });
+            }
+          }
+        )
+      }
+    })
   }
 }

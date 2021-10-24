@@ -34,6 +34,19 @@ export class ProductService {
       );
   }
 
+  deleteProduct(id, token){
+    return this.http
+      .delete<any>('http://localhost:8080/api/product/delete/id/' + id, {
+        headers: new HttpHeaders().set('Authorization', token),
+      })
+      .pipe(
+        map((data) => {
+          return data;
+        })
+      );
+
+  }
+
   decProduct(id, data, token) {
     return this.http
       .put<any>('http://localhost:8080/api/product/update/dec/' + id, data, {

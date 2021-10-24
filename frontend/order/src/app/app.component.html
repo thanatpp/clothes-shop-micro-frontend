@@ -1,13 +1,14 @@
-<div class="flex justify-center mt-8">
+<div class="flex justify-center mt-8" *ngIf="orders">
     <div class="w-full px-3 block md:w-3/4">
         <div class="block md:flex justify-between w-full py-5">
             <div class="flex w-full">
                 <div class="w-2/4 flex relative">
                     <input type="text"
+                        [(ngModel)]="searchText"
                         class="w-full pr-10 font-mono font-normal text-xl opacity-80 rounded-lg focus:ring-0 focus:border-gray-300 border-2 border-gray-300"
-                        placeholder="Search by Name">
+                        placeholder="Search by First Name">
                     <div class="absolute inset-y-0 right-0 flex items-center rounded-lg">
-                        <button class="p-3 h-full focus:ring-0 focus:outline-none">
+                        <button class="p-3 h-full focus:ring-0 focus:outline-none" (click)="search()">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-50" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -19,25 +20,43 @@
             </div>
         </div>
         <div class="w-full mt-5">
-            <table class="table-auto w-full border border-gray-300">
+            <table class="table-auto w-full border border-gray-300" *ngIf="!ordersIsNull">
                 <thead class="bg-gray-300">
                     <tr>
-                        <th class="font-mono text-xl">ID</th>
-                        <th class="font-mono text-xl">NAME</th>
-                        <th class="font-mono text-xl">ADDRESS</th>
-                        <th class="font-mono text-xl">PRODUCT</th>
-                        <th class="font-mono text-xl">QUANTITY</th>
-                        <th class="font-mono text-xl">DATE</th>
+                        <th class="font-mono text-sm">PRODUCT</th>
+                        <th class="font-mono text-sm">SIZE</th>
+                        <th class="font-mono text-sm">QUANTITY</th>
+                        <th class="font-mono text-sm">PRODUCT</th>
+                        <th class="font-mono text-sm">DATE</th>
                     </tr>
                 </thead>
-                <tbody *ngFor="let item of orders; index as i; odd as isOdd">
+                <tbody *ngFor="let item of _orders; index as i; odd as isOdd">
                     <tr [ngClass]="isOdd ? 'bg-gray-100' : 'bg-white'">
-                        <td class="text-center text-lg font-mono">{{item.order_id}}</td>
-                        <td class="text-center text-lg font-mono">{{item.firstName + " " + item.lastName}}</td>
-                        <td class="text-center text-lg font-mono">{{address(item.address, item.addressDetails, item.district, item.province, item.postalCode)}}</td>
-                        <td class="text-center text-lg font-mono">{{item.productName}}</td>
-                        <td class="text-center text-lg font-mono">{{item.quantity}}</td>
-                        <td class="text-center text-lg font-mono">{{item.date}}</td>
+                        <td class="text-center text-sm font-mono">{{item.product.name}}</td>
+                        <td class="text-center text-sm font-mono">{{item.size || "-"}}</td>
+                        <td class="text-center text-sm font-mono">{{item.quantity}}</td>
+                        <td class="text-center text-sm font-mono">{{address(item.address.firstName, item.address.lastName, item.address.phoneNumber, item.address.detail, item.address.address.amphoe, item.address.address.district, item.address.address.province, item.address.address.zipcode)}}</td>
+                        <td class="text-center text-sm font-mono">{{item.date}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table-auto w-full border border-gray-300" *ngIf="ordersIsNull">
+                <thead class="bg-gray-300">
+                    <tr>
+                        <th class="font-mono text-sm">PRODUCT</th>
+                        <th class="font-mono text-sm">SIZE</th>
+                        <th class="font-mono text-sm">QUANTITY</th>
+                        <th class="font-mono text-sm">PRODUCT</th>
+                        <th class="font-mono text-sm">DATE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr [ngClass]="isOdd ? 'bg-gray-100' : 'bg-white'">
+                        <td class="text-center text-sm font-mono">Not found order.</td>
+                        <td class="text-center text-sm font-mono"></td>
+                        <td class="text-center text-sm font-mono"></td>
+                        <td class="text-center text-sm font-mono"></td>
+                        <td class="text-center text-sm font-mono"></td>
                     </tr>
                 </tbody>
             </table>
