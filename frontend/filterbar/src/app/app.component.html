@@ -1,7 +1,10 @@
 <div class="flex">
     <div class="relative w-64">
         <div class="fixed top-24 ml-5 w-52">
-            <p class="px-3 my-6 font-bold font-mono text-3xl uppercase">{{gender}}</p>
+            <div class="flex">
+                <p class="px-3 my-6 font-bold font-mono text-3xl uppercase">{{gender}}</p>
+                <p class="px-3 my-9 font-bold font-mono text-xs uppercase">v{{appVersion}}</p>
+            </div>
             <button class="block px-3 py-2 text-lg hover:bg-white hover:shadow-2xl hover:scale-105 transition-all transform duration-500 w-full text-left font-mono focus:bg-white focus:outline-none" (click)="selectAll()">ALL PRODUCTS</button>
             <button class="block px-3 py-2 text-lg hover:bg-white hover:shadow-2xl hover:scale-105 transition-all transform duration-500 w-full text-left font-mono focus:bg-white focus:outline-none" (click)="selectTops()">TOPS</button>
             <button class="block px-3 py-2 text-lg hover:bg-white hover:shadow-2xl hover:scale-105 transition-all transform duration-500 w-full text-left font-mono focus:bg-white focus:outline-none" (click)="selectBottoms()">BOTTOMS</button>

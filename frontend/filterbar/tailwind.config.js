@@ -15,9 +15,7 @@ module.exports = {
       extend: {},
     },
     variants: {
-      extend: {
-        backgroundColor: ['active'],
-      },
+      extend: {},
     },
     plugins: [require('@tailwindcss/forms'),require('@tailwindcss/typography')],
 };

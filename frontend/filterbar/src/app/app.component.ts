@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, VERSION } from '@angular/core';
 
 @Component({
   selector: 'filterbar-root',
@@ -8,15 +8,17 @@ import { Component, OnInit } from '@angular/core';
 
 export class AppComponent implements OnInit {
   
-  gender: string
-  type: string
+  gender: string = ""
+  type: string = ""
+  appVersion: string = VERSION.full;
 
   ngOnInit(){
     this.type = "all"
     this.checkUrl()
-    window.addEventListener("selectGender", (e: CustomEvent) => {
+    window.addEventListener("selectGender", (e: any) => {
       this.gender = e.detail
     })
+    console.log(this.appVersion)
   }
 
   selectTops(){
